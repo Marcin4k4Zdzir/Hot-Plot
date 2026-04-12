@@ -43,6 +43,15 @@ navi {
     color: var(--color-primary);
 }
 
+.social-icon:hover {
+    color: var(--color-primary-hover);
+    cursor: pointer;
+}
+
+.social-icon path {
+    color: inherit !important;
+}
+
 .login-buttons * {
     background-color: var(--color-primary);
     border: none;
