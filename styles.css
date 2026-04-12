@@ -11,6 +11,10 @@
     font-family: sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 header {
     width: 100vw;
     inset: 0;
@@ -80,11 +84,7 @@ button:hover {
 }
 
 .navigation-button {
-    font-size: 1.5rem;
-}
-
-.navigation-button a {
-    text-decoration: none;
+    font-size: 1.25rem;
 }
 
 .navigation-button:hover {
@@ -100,6 +100,7 @@ article img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-radius: 0.75rem;
 }
 
 body {
@@ -121,7 +122,11 @@ body {
 }
 
 article {
+    padding: 1rem;
+    background: var(--color-primary);
+    border-radius: 1.5rem;
     width: max(200px, 100%);
+    box-shadow: 0 0.25rem 0.75rem black;
 }
 
 
