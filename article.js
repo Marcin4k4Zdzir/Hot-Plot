@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function initView(articles) {
-    debugger;
     const articleId = getArticleIdFromUrl();
     document.querySelector('.article-title').innerHTML = articles[articleId].title;
     document.querySelector('.article-lead').innerHTML = articles[articleId].lead;
