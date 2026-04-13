@@ -63,6 +63,7 @@ button:hover {
 
 #page-logo {
     width: 12rem;
+    cursor: pointer;
 }
 
 .social-icon {
@@ -151,6 +152,9 @@ article {
     border-radius: 1.5rem;
     width: max(200px, 100%);
     box-shadow: 0 0.25rem 0.75rem black;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 
