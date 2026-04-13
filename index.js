@@ -112,7 +112,6 @@ function populateArticles(articles) {
         <article data-article-id="${article.id}" class="clickable-article">
             <img src="${article.imageSource}" alt="${article.title}">
             <h2>${article.title}</h2>
-            <p>${article.lead}</p>
             ${article.publicationDate ? '<div class="article-time"><caption id="time-' + article.id + '">' + formatTimePassed(article.publicationDate) + '</caption></div>' : ''}
         </article>
     `).join('');
