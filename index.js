@@ -15,6 +15,15 @@ const lifestyleButton = document.getElementById('lifestyle-button');
 const hotButton = document.getElementById('hot-button');
 const moreButton = document.getElementById('more-button');
 
+const articlesContainer = document.getElementById('article-container');
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const articles = await loadArticles();
+    if (articles) {
+        populateArticles(articles);
+    }
+});
+
 // Event Listeners
 loginButton.addEventListener('click', () => { window.alert('Jeszcze nie mogę Cię zalogować misiaku') });
 signupButton.addEventListener('click', () => { window.alert('Chciałbyś się juz zarejestrować, co?') });
@@ -35,4 +44,29 @@ moreButton.addEventListener('click', () => { window.alert('Tu znajdziesz wszystk
 // Actions
 function displayMissingSocialsAccountPrompt(social) {
     window.alert(`Sorki, nie mamy jeszcze konta na ${social} :*`);;
+}
+
+function populateArticles(articles) {
+    articlesContainer.innerHTML = articles.map((article) => `
+        <article>
+            <img src="${article.imageSource}">
+            <h2><a href="article.html?id=${article.id}">${article.title}</a></h2>
+            <p>${article.lead}</p>
+        </article>`
+    ).join('');
+}
+
+export async function loadArticles() {
+    try {
+        const response = await fetch('articles.json');
+        if (!response.ok) {
+            throw new Error('Failed to load articles JSON');
+        }
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
 }
