@@ -1,13 +1,15 @@
 import { loadArticles } from "./index.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const articles = await loadArticles();
-    if (articles) {
-        initView(articles);
-    }
+    await initView();
 });
 
-function initView(articles) {
+async function initView() {
+    const articles = await loadArticles();
+    if (!articles) {
+        return
+    }
+
     const articleId = getArticleIdFromUrl();
     document.querySelector('.article-title').innerHTML = articles[articleId].title;
     document.querySelector('.article-lead').innerHTML = articles[articleId].lead;

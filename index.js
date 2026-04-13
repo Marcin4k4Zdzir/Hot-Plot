@@ -18,28 +18,45 @@ const moreButton = document.getElementById('more-button');
 const articlesContainer = document.getElementById('article-container');
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await initView();
+    addEventListeners();
+});
+
+async function initView() {
     const articles = await loadArticles();
     if (articles) {
         populateArticles(articles);
     }
-});
+}
 
 // Event Listeners
-loginButton.addEventListener('click', () => { window.alert('Jeszcze nie mogę Cię zalogować misiaku') });
-signupButton.addEventListener('click', () => { window.alert('Chciałbyś się juz zarejestrować, co?') });
+function addEventListeners() {
+    loginButton.addEventListener('click', () => { window.alert('Jeszcze nie mogę Cię zalogować misiaku') });
+    signupButton.addEventListener('click', () => { window.alert('Chciałbyś się juz zarejestrować, co?') });
 
-facebookIcon.addEventListener('click', () => displayMissingSocialsAccountPrompt("Facebook'u"));
-instagramIcon.addEventListener('click', () => displayMissingSocialsAccountPrompt("Instagram'ie"));
-tiktokIcon.addEventListener('click', () => displayMissingSocialsAccountPrompt("TikTok'u"));
+    facebookIcon.addEventListener('click', () => displayMissingSocialsAccountPrompt("Facebook'u"));
+    instagramIcon.addEventListener('click', () => displayMissingSocialsAccountPrompt("Instagram'ie"));
+    tiktokIcon.addEventListener('click', () => displayMissingSocialsAccountPrompt("TikTok'u"));
 
-interviewsButton.addEventListener('click', () => { window.alert('Tu będziemy publikować wywiady') });
-newsButton.addEventListener('click', () => { window.alert('Tu wrzucimy newsy, które mogą Cię zainsteresować') });
-videoButton.addEventListener('click', () => { window.alert('Tutaj będą przerózne filmiki') });
-galleryButton.addEventListener('click', () => { window.alert('Tu znajdziesz foty, które udało nam się zdobyć') });
-paparazziButton.addEventListener('click', () => { window.alert('Tu będziemy pokazywać paparazzi') });
-lifestyleButton.addEventListener('click', () => { window.alert('Tu znajdziesz artykuły, które pomogą Ci zostać gwiazdą!') });
-hotButton.addEventListener('click', () => { window.alert('Tu znajdziesz najgorętsze wiadomości z ostatniego tygodnia') });
-moreButton.addEventListener('click', () => { window.alert('Tu znajdziesz wszystko to, czego nie było nigdzie idziej') });
+    interviewsButton.addEventListener('click', () => { window.alert('Tu będziemy publikować wywiady') });
+    newsButton.addEventListener('click', () => { window.alert('Tu wrzucimy newsy, które mogą Cię zainsteresować') });
+    videoButton.addEventListener('click', () => { window.alert('Tutaj będą przerózne filmiki') });
+    galleryButton.addEventListener('click', () => { window.alert('Tu znajdziesz foty, które udało nam się zdobyć') });
+    paparazziButton.addEventListener('click', () => { window.alert('Tu będziemy pokazywać paparazzi') });
+    lifestyleButton.addEventListener('click', () => { window.alert('Tu znajdziesz artykuły, które pomogą Ci zostać gwiazdą!') });
+    hotButton.addEventListener('click', () => { window.alert('Tu znajdziesz najgorętsze wiadomości z ostatniego tygodnia') });
+    moreButton.addEventListener('click', () => { window.alert('Tu znajdziesz wszystko to, czego nie było nigdzie idziej') });
+
+    if (articlesContainer) {
+        articlesContainer.addEventListener('click', (e) => {
+            const article = e.target.closest('.clickable-article');
+            if (article) {
+                const articleId = article.dataset.articleId;
+                window.location.href = `article.html?id=${articleId}`;
+            }
+        })
+    };
+}
 
 // Actions
 function displayMissingSocialsAccountPrompt(social) {
@@ -90,7 +107,6 @@ function formatTimePassed(publicationDate) {
     }
 }
 
-// Modified populateArticles function with time display
 function populateArticles(articles) {
     articlesContainer.innerHTML = articles.map((article) => `
         <article data-article-id="${article.id}" class="clickable-article">
