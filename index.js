@@ -46,16 +46,6 @@ function displayMissingSocialsAccountPrompt(social) {
     window.alert(`Sorki, nie mamy jeszcze konta na ${social} :*`);;
 }
 
-function populateArticles(articles) {
-    articlesContainer.innerHTML = articles.map((article) => `
-        <article>
-            <img src="${article.imageSource}">
-            <h2><a href="article.html?id=${article.id}">${article.title}</a></h2>
-            <p>${article.lead}</p>
-        </article>`
-    ).join('');
-}
-
 export async function loadArticles() {
     try {
         const response = await fetch('articles.json');
@@ -69,4 +59,45 @@ export async function loadArticles() {
         console.error('Error:', error);
         return null;
     }
+}
+
+// Add this function to calculate time passed
+function getTimePassed(publicationDate) {
+    const now = new Date();
+    const published = new Date(publicationDate);
+    const diffInSeconds = Math.floor((now - published) / 1000);
+    
+    const days = Math.floor(diffInSeconds / 86400);
+    const hours = Math.floor((diffInSeconds % 86400) / 3600);
+    const minutes = Math.floor((diffInSeconds % 3600) / 60);
+    const seconds = diffInSeconds % 60;
+    
+    return { days, hours, minutes, seconds };
+}
+
+// Format the time as a readable string
+function formatTimePassed(publicationDate) {
+    const { days, hours, minutes, seconds } = getTimePassed(publicationDate);
+    
+    if (days > 0) {
+        return `${days}d ${hours}h ${minutes}m`;
+    } else if (hours > 0) {
+        return `${hours}h ${minutes}m ${seconds}s`;
+    } else if (minutes > 0) {
+        return `${minutes}m ${seconds}s`;
+    } else {
+        return `${seconds}s`;
+    }
+}
+
+// Modified populateArticles function with time display
+function populateArticles(articles) {
+    articlesContainer.innerHTML = articles.map((article) => `
+        <article data-article-id="${article.id}" class="clickable-article">
+            <img src="${article.imageSource}" alt="${article.title}">
+            <h2>${article.title}</h2>
+            <p>${article.lead}</p>
+            ${article.publicationDate ? '<div class="article-time"><caption id="time-' + article.id + '">' + formatTimePassed(article.publicationDate) + '</caption></div>' : ''}
+        </article>
+    `).join('');
 }
