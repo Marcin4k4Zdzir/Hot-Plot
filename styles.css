@@ -1,6 +1,7 @@
 :root {
-    --color-primary: hsl(300, 88%, 35%);
-    --color-primary-hover: hsl(300, 88%, 45%);
+    --color-primary: hsl(338, 98%, 40%);
+    --color-primary-hover: hsl(338, 98%, 50%);
+    --color-background: hsl(338, 98%, 40%, 70%);
 }
 
 * {
@@ -21,7 +22,7 @@ header {
     position: sticky;
     display: flex;
     flex-direction: column;
-    background-color: hsl(300, 88%, 22%);
+    background-color: hsl(338, 98%, 20%);
     justify-items: center;
     box-shadow: 0 0 0.75rem 0.1rem black;
     gap: 0.5rem;
@@ -111,7 +112,7 @@ body {
     align-items: center;
     width: max(500px, 80%);
     height: 100vh;
-    background: hsl(300, 88%, 45%, 60%);
+    background: var(--color-background);
 }
 
 #article-container {
@@ -119,6 +120,29 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
+}
+
+.main-article {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.article-lead {
+    font-size: 1.25rem;
+}
+
+.article-image {
+    width: max(60%, 600px);
+    border-radius: 2rem;
+}
+
+.article-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 article {
