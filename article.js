@@ -1,4 +1,4 @@
-import { loadArticles } from "./index.js";
+import { loadArticles, populateAds } from "./index.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     await initView();
@@ -17,6 +17,8 @@ async function initView() {
     document.querySelector('.article-text').innerHTML = articles[articleId].text.map((paragraph) => `
         <p>${paragraph}</p>`
     ).join('');
+
+    populateAds();
 }
 
 function getArticleIdFromUrl() {

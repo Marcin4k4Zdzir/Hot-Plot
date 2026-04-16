@@ -16,6 +16,7 @@ const hotButton = document.getElementById('hot-button');
 const moreButton = document.getElementById('more-button');
 
 const articlesContainer = document.getElementById('article-container');
+const adContainer = document.getElementById('vertical-ad-container');
 
 document.addEventListener('DOMContentLoaded', async () => {
     await initView();
@@ -27,6 +28,7 @@ async function initView() {
     if (articles) {
         populateArticles(articles);
     }
+    populateAds();
 }
 
 // Event Listeners
@@ -115,4 +117,17 @@ function populateArticles(articles) {
             ${article.publicationDate ? '<div class="article-time"><caption id="time-' + article.id + '">' + formatTimePassed(article.publicationDate) + '</caption></div>' : ''}
         </article>
     `).join('');
+}
+
+export function populateAds() {
+    const adNumbers = [1, 2, 3, 4, 5];
+    const randomAdNumber = adNumbers[Math.floor(Math.random() * adNumbers.length)];
+    const adFileName = `ad-0${randomAdNumber}.jpg`;
+    
+    const adImage = document.createElement('img');
+    adImage.src = adFileName;
+    adImage.alt = `Advertisement ${randomAdNumber}`;
+    
+    adContainer.innerHTML = '';
+    adContainer.appendChild(adImage);
 }
